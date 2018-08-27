@@ -15,7 +15,7 @@ class Blog extends Component {
     }
 
     componentDidMount () {
-        axios.get('http://jsonplaceholder.typicode.com/posts') // error handling if URL is wrong
+        axios.get('/posts') // error handling if URL is wrong
         .then(response => {
             const posts = response.data.slice(0,4); // first 4 posts
             const updatedPosts = posts.map(post => {
