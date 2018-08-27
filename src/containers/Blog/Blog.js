@@ -10,22 +10,27 @@ import axios from "axios";
 class Blog extends Component {
     state = {
         posts: [],
-        postSelectedId: null
+        postSelectedId: null,
+        error: false
     }
 
     componentDidMount () {
-        axios.get('http://jsonplaceholder.typicode.com/posts')
-            .then(response => {
-                const posts = response.data.slice(0,4); // first 4 posts
-                const updatedPosts = posts.map(post => {
-                    return {
-                        ...post,
-                        author: 'Max' // add author Max to the posts
-                    }
-                });
-                this.setState({posts: updatedPosts})
-                console.log(response)
+        axios.get('http://jsonplaceholder.typicode.com/posts') // error handling if URL is wrong
+        .then(response => {
+            const posts = response.data.slice(0,4); // first 4 posts
+            const updatedPosts = posts.map(post => {
+                return {
+                    ...post,
+                    author: 'Max' // add author Max to the posts
+                }
             });
+            this.setState({posts: updatedPosts})
+            console.log(response)
+        })
+        .catch(error => {
+            console.log(error)
+            this.setState({error: true});
+        });
     }
 
 
@@ -34,14 +39,18 @@ class Blog extends Component {
     }
 
     render () {
-        const posts = this.state.posts.map(post => {
-            return <Post 
-            key={post.id} 
-            title={post.title} 
-            author={post.author}
-            clicked={()=> this.postSelectedHandler(post.id) }
-             />;
-        })
+        let posts = <p style={{textAlign: 'center'}}>Something went wrong</p>
+        // no error
+        if(!this.state.error) {
+           posts = this.state.posts.map(post => {
+                return <Post 
+                key={post.id} 
+                title={post.title} 
+                author={post.author}
+                clicked={()=> this.postSelectedHandler(post.id) }
+                 />;
+            });
+        }
 
         return (
             <div>
