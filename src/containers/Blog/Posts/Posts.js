@@ -10,6 +10,7 @@ class Posts extends Component {
     }
 
     componentDidMount () {
+        console.log(this.props)
         axios.get('/posts') // error handling if URL is wrong
         .then(response => {
             const posts = response.data.slice(0,4); // first 4 posts
