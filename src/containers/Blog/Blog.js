@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Route, Link} from 'react-router-dom';
+//import {Route, Link} from 'react-router-dom';
+import {Route, NavLink} from 'react-router-dom';
+
 // styling
 import './Blog.css';
-
 // components
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost'
@@ -13,20 +14,18 @@ import NewPost from './NewPost/NewPost'
 class Blog extends Component {
 
     render () {
-        
-
         return (
             <div className="Blog">
                 <header>
                     <nav>
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
+                            <li><NavLink to="/" exact activeClassName="my-active" activeStyle={{color: "blue", textDecoration:"underline"}}>Home</NavLink></li>
+                            <li><NavLink to={{
                                 pathname: "/new-post",
                                 hash: "#submit",
                                 search: '?quick-submit=true' // query params
 
-                            }}>New Post</Link></li>
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>
