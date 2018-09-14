@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import {Route, Link} from 'react-router-dom';
-import {Route, NavLink} from 'react-router-dom';
+import {Route, NavLink, Switch} from 'react-router-dom';
 
 // styling
 import './Blog.css';
@@ -30,9 +30,13 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-               <Route path = "/" exact  component={Posts}/>
-               <Route path = "/new-post" exact  component={NewPost}/>
-               <Route path = "/:id" exact component={FullPost} />
+                
+                <Route path = "/" exact  component={Posts}/>
+                {/* SWITCH loads only the first Route which matches the criteria and then stop. Route path order matters! */}
+                <Switch>
+                    <Route path = "/new-post" exact  component={NewPost}/>
+                    <Route path = "/:id" exact component={FullPost} />
+                </Switch>
             </div>
         );
     }
