@@ -7,7 +7,7 @@ import './Blog.css';
 // components
 import Posts from './Posts/Posts';
 import NewPost from './NewPost/NewPost';
-import FullPost from './FullPost/FullPost';
+//import FullPost from './FullPost/FullPost';
 
 //import axios from "axios";
 //import axios from '../../axios';
@@ -20,7 +20,7 @@ class Blog extends Component {
                 <header>
                     <nav>
                         <ul>
-                            <li><NavLink to="/" exact activeClassName="my-active" activeStyle={{color: "blue", textDecoration:"underline"}}>Home</NavLink></li>
+                            <li><NavLink to="/posts/" exact activeClassName="my-active" activeStyle={{color: "blue", textDecoration:"underline"}}>Posts</NavLink></li>
                             <li><NavLink to={{
                                 pathname: "/new-post",
                                 hash: "#submit",
@@ -31,11 +31,12 @@ class Blog extends Component {
                     </nav>
                 </header>
                 
-                <Route path = "/" exact  component={Posts}/>
+           
                 {/* SWITCH loads only the first Route which matches the criteria and then stop. Route path order matters! */}
                 <Switch>
-                    <Route path = "/new-post" exact  component={NewPost}/>
-                    <Route path = "/:id" exact component={FullPost} />
+                    <Route path = "/new-post" component={NewPost}/>
+                    <Route path = "/posts" component={Posts}/>
+                    {/* <Route path = "/:id" exact component={FullPost} /> */}
                 </Switch>
             </div>
         );
