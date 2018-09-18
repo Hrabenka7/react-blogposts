@@ -13,6 +13,9 @@ import NewPost from './NewPost/NewPost';
 //import axios from '../../axios';
 
 class Blog extends Component {
+    state = {
+        auth: false
+    }
 
     render () {
         return (
@@ -34,7 +37,7 @@ class Blog extends Component {
            
                 {/* SWITCH loads only the first Route which matches the criteria and then stop. Route path order matters! */}
                 <Switch>
-                    <Route path = "/new-post" component={NewPost}/>
+                    {this.state.auth ? <Route path = "/new-post" component={NewPost}/> : null}
                     <Route path = "/posts" component={Posts}/>
                     {/* <Route path = "/:id" exact component={FullPost} /> */}
                     <Redirect from="/" to="/posts" /> {/* out of switch statement use without 'from' */}
